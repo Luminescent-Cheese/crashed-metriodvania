@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	#Below partains to horizontal movement & friction
 	if heldDirection != 0:
 		if currentSpeed < MAXSPEED:
-			currentSpeed += 100
+			currentSpeed += 45
 	else:
 		if is_on_floor():
 			currentSpeed -= currentSpeed/groundFriction
