@@ -3,30 +3,25 @@ extends Node2D
 @export var canShoot = true
 var maxAmmo = 6
 
-var intendedDirection = 0
+var intendedDirection: String = "not"
 var currentDirection = 0
 var currentAmmo = 6
+var currentFacing = 1
 func _physics_process(delta: float) -> void:
+	if Input.get_axis("left","right") != 0:
+		currentFacing = int(Input.get_axis("left","right"))
 	if currentAmmo >  0:
 		if Input.is_action_pressed("shoot"):
 			GunAnimationPlayer.play("shoot")
 	else:
 		GunAnimationPlayer.play("spin")
-	
 	if Input.is_action_pressed("up"):
-		intendedDirection = -1
+		currentDirection = lerp_angle(currentDirection, 80, 20 * delta)
 	elif Input.is_action_pressed("down"):
-		intendedDirection = 1
+		currentDirection = lerp_angle(currentDirection, -80, 20 * delta)
 	else:
-		intendedDirection = 0
-	if intendedDirection != currentDirection:
-		var targetAngle = (global_position.direction_to(global_position + Vector2(0, 100 * intendedDirection))).angle()
-		if intendedDirection != 0:
-			rotation = lerp_angle(rotation, targetAngle, 20 * delta)
-		else:
-			rotation = lerp_angle(rotation, 0, 20 * delta)
-		if abs(currentDirection) == deg_to_rad(90) or currentDirection == 0:
-			currentDirection = intendedDirection
+		currentDirection = lerp_angle(currentDirection, 0, 20 * delta)
+	rotation = currentDirection	* currentFacing
 func fireBullet():
 	currentAmmo -= 1
 
