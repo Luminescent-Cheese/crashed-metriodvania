@@ -857,6 +857,9 @@ animation = &"Pistol shoot"
 offset = Vector2(5, 15)
 flip_h = true
 
+[node name="bulletFirePoint" type="Node2D" parent="Arm/ArmAnimations"]
+position = Vector2(-55, -11)
+
 [node name="ArmAnimationsPlayer" type="AnimationPlayer" parent="Arm"]
 libraries = {
 &"": SubResource("AnimationLibrary_r7pn3")

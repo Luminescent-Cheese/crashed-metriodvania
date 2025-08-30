@@ -63,6 +63,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 func _update_animations(x,y):
+	#Updates the conditions that are used by the players animation tree's state machine
 	var heldDirection = x
 	if y > 0:
 		animation_tree["parameters/conditions/is_falling"] = true

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2r1uinveiglr"]
+
+[ext_resource type="Texture2D" uid="uid://b6i2y4umi2f33" path="res://icon.svg" id="1_kxtci"]
+[ext_resource type="Script" uid="uid://xxj40pa0olli" path="res://player Bullet/player_bullet.gd" id="1_t7of7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kxtci"]
+radius = 17.088
+
+[node name="playerBullet" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_t7of7")
+
+[node name="bulletSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.217683, 0.229571)
+texture = ExtResource("1_kxtci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kxtci")
+debug_color = Color(0.996673, 0, 0.182052, 0.42)
+
+[node name="BulletAutoDelete" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="BulletAutoDelete" to="." method="_on_bullet_auto_delete_timeout"]
