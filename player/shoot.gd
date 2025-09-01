@@ -1,4 +1,7 @@
 extends Node2D
+
+signal fire_recoil
+
 @export var bulletScene = preload("res://player Bullet/player_bullet.tscn")
 @export var GunAnimationPlayer: AnimationPlayer
 
@@ -48,7 +51,7 @@ func fireBullet():
 		newBullet.direction = Vector2(currentFacing, 0)
 	newBullet.additionVelocity = get_parent().velocity
 	get_parent().add_sibling(newBullet)
-	get_parent().yVelocity -= recoil
+	fire_recoil.emit()
 
 func reload():
 	currentAmmo = maxAmmo

@@ -1,20 +1,30 @@
 extends CharacterBody2D
 @onready var animation_tree = $PlayerAnimationTree
 #Factual Variables
-var MAXSPEED = 900
+var MAXSPEED = 800
 var gravity = 160 
-var jumpHeight = 800
+var maxjumpHeight = 1000
+var recoilStrength = 45
+#Stance is how much you can resist recoil when on the ground
+var stance = 3
+var airStance = 3
 
 #For Friction the larger the number the less Friction
 var groundFriction = 8
 var airResistance = 30
 
 #Changing Variables
+var horizontalRecoil = 0
+var jumpHeight = 0
+var recoilDirection: String
+var recoilTime = 0
 var coyoteTime = 8
-var lastHeldDirection = 0
+var lastHeldDirection = -1
 var canJump = 0
 var currentSpeed = 0
 var yVelocity:float = 0.0
+
+
 func _ready() -> void:
 	animation_tree.active = true
 	
@@ -26,15 +36,23 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		yVelocity = 0
 		coyoteTime = 8
+	elif recoilTime > 0 and recoilDirection == "down":
+		#Does recoil instead of gravity if pointing gun down
+		yVelocity -= recoilStrength * recoilTime
+		recoilTime -= 1
 	elif yVelocity < 1500:
 		yVelocity += gravity
+		#adds recoil to gravity if pointing gun up
+		if recoilTime > 0 and recoilDirection == "up":
+			yVelocity += recoilStrength * recoilTime
+			recoilTime -= 1
 	if coyoteTime > 0 and not is_on_floor():
 		coyoteTime -= 1
 	if Input.is_action_pressed("jump") and (is_on_floor() or coyoteTime > 0):
 			yVelocity = 0
 			coyoteTime = 0
 			canJump = 15
-			jumpHeight = 1200
+			jumpHeight = maxjumpHeight
 	if Input.is_action_pressed("jump") and canJump > 0:
 		if is_on_ceiling():
 			canJump = 0
@@ -47,6 +65,20 @@ func _physics_process(delta: float) -> void:
 		canJump = 0
 	
 	#Below partains to horizontal movement & friction
+	# Horizontal Recoil
+	var horizontalRecoilDirection = 0
+	if recoilDirection == "left":
+		horizontalRecoilDirection = 1
+	elif recoilDirection == "right":
+		horizontalRecoilDirection = -1
+	if recoilTime > 0 and (recoilDirection == "right" or recoilDirection == "left"):
+		horizontalRecoil += recoilStrength * recoilTime
+		recoilTime -= 1
+		#Friction/stance for Recoil
+	if is_on_floor():
+		horizontalRecoil -= (horizontalRecoil*stance)/groundFriction
+	else:
+		horizontalRecoil -= horizontalRecoil/airResistance
 	if heldDirection != 0:
 		if currentSpeed < MAXSPEED:
 			currentSpeed += 45
@@ -55,13 +87,38 @@ func _physics_process(delta: float) -> void:
 			currentSpeed -= currentSpeed/groundFriction
 			if currentSpeed < 100:
 				currentSpeed = 0
+			if horizontalRecoil < 100:
+				horizontalRecoil = 0
 		else:
 			currentSpeed -= currentSpeed/airResistance 
-	velocity = Vector2(lastHeldDirection * currentSpeed, yVelocity)
+	velocity = Vector2((lastHeldDirection * currentSpeed) + (horizontalRecoilDirection * horizontalRecoil), yVelocity)
 	move_and_slide()
 	_update_animations(heldDirection, yVelocity)
 	
 	
+
+func _on_arm_fire_recoil() -> void:
+	#Handles The recoil from firing
+	#Direction for recoil
+	if Input.is_action_pressed("up"):
+		recoilDirection = "up"
+	elif Input.is_action_pressed("down"):
+		recoilDirection = "down"
+	elif lastHeldDirection == 1:
+		recoilDirection = "right"
+	else:
+		recoilDirection = "left"
+	#Force for recoil
+	if not is_on_floor() or recoilDirection == "right" or recoilDirection == "left":
+		recoilTime = 8
+	else:
+		recoilTime = 0
+	if recoilDirection == "down":
+		yVelocity = 0
+		if yVelocity < -200 and not is_on_floor():
+			recoilTime += 1
+		
+
 func _update_animations(x,y):
 	#Updates the conditions that are used by the players animation tree's state machine
 	var heldDirection = x
