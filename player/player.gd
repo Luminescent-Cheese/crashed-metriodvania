@@ -7,7 +7,7 @@ var maxjumpHeight = 1000
 var recoilStrength = 45
 #Stance is how much you can resist recoil when on the ground
 var stance = 3
-var airStance = 3
+var airStance = 10
 
 #For Friction the larger the number the less Friction
 var groundFriction = 8
@@ -39,7 +39,10 @@ func _physics_process(delta: float) -> void:
 	elif recoilTime > 0 and recoilDirection == "down":
 		#Does recoil instead of gravity if pointing gun down
 		yVelocity -= recoilStrength * recoilTime
-		recoilTime -= 1
+		if not is_on_ceiling():
+			recoilTime -= 1
+		else:
+			recoilTime = 0
 	elif yVelocity < 1500:
 		yVelocity += gravity
 		#adds recoil to gravity if pointing gun up
@@ -125,7 +128,13 @@ func _update_animations(x,y):
 	if y > 0:
 		animation_tree["parameters/conditions/is_falling"] = true
 		animation_tree["parameters/conditions/isn't_falling"] = false
+		animation_tree["parameters/conditions/is_jumping"] = false
+	elif y < 0:
+		animation_tree["parameters/conditions/is_jumping"] = true
+		animation_tree["parameters/conditions/is_falling"] = false
+		animation_tree["parameters/conditions/isn't_falling"] = true
 	else:
+		animation_tree["parameters/conditions/is_jumping"] = false
 		animation_tree["parameters/conditions/is_falling"] = false
 		animation_tree["parameters/conditions/isn't_falling"] = true
 		if heldDirection != 0:
@@ -138,3 +147,4 @@ func _update_animations(x,y):
 		animation_tree["parameters/Idle/blend_position"] = heldDirection
 		animation_tree["parameters/Walk/blend_position"] = heldDirection
 		animation_tree["parameters/Falling/blend_position"] = heldDirection
+		animation_tree["parameters/Jumping/blend_position"] = heldDirection
