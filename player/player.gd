@@ -1,16 +1,20 @@
 extends CharacterBody2D
+@onready var Game = $".."
 @onready var animation_tree = $PlayerAnimationTree
 #Factual Variables
 var MAXSPEED = 800
-var gravity = 160 
-var maxjumpHeight = 1000
-var recoilStrength = 45
+var gravity = 150 
+var maxjumpHeight = 600
+var recoilStrength = 30
+var jumpTime = 30
+#controls how fast play loses speed when jumping
+var jumpDivision = 6.0
 #Stance is how much you can resist recoil when on the ground
-var stance = 3
-var airStance = 10
+var stance = 3.0
+var airStance = 10.0
 
 #For Friction the larger the number the less Friction
-var groundFriction = 8
+var groundFriction = 6
 var airResistance = 30
 
 #Changing Variables
@@ -21,7 +25,7 @@ var recoilTime = 0
 var coyoteTime = 8
 var lastHeldDirection = -1
 var canJump = 0
-var currentSpeed = 0
+var currentSpeed = 0.0
 var yVelocity:float = 0.0
 
 
@@ -44,17 +48,22 @@ func _physics_process(delta: float) -> void:
 		else:
 			recoilTime = 0
 	elif yVelocity < 1500:
-		yVelocity += gravity
+		#Reduces effect of gravity when jumping
+		if canJump > 0:
+			yVelocity += gravity - 30
+		else:
+			yVelocity += gravity
 		#adds recoil to gravity if pointing gun up
 		if recoilTime > 0 and recoilDirection == "up":
 			yVelocity += recoilStrength * recoilTime
 			recoilTime -= 1
 	if coyoteTime > 0 and not is_on_floor():
 		coyoteTime -= 1
+	#Covers Jumping
 	if Input.is_action_pressed("jump") and (is_on_floor() or coyoteTime > 0):
 			yVelocity = 0
 			coyoteTime = 0
-			canJump = 15
+			canJump = jumpTime
 			jumpHeight = maxjumpHeight
 	if Input.is_action_pressed("jump") and canJump > 0:
 		if is_on_ceiling():
@@ -62,7 +71,7 @@ func _physics_process(delta: float) -> void:
 			yVelocity = 100
 			jumpHeight = 0
 		canJump -= 1
-		jumpHeight -= jumpHeight/4
+		jumpHeight -= jumpHeight/jumpDivision
 		yVelocity -= jumpHeight
 	elif not Input.is_action_pressed("jump"):
 		canJump = 0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://p5aajw7ehfxg"]
+[gd_scene load_steps=6 format=4 uid="uid://p5aajw7ehfxg"]
 
 [ext_resource type="PackedScene" uid="uid://dtjjmbh6huaru" path="res://player/player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://c0p7ilmklsx40" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="Texture2D" uid="uid://yj7fyrd18lwi" path="res://New Piskel (1).png" id="2_e2o6t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feb5d"]
@@ -16,6 +17,7 @@ physics_layer_0/collision_mask = 3
 sources/1 = SubResource("TileSetAtlasSource_feb5d")
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_feb5d")
 
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
 

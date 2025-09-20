@@ -1,7 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2r1uinveiglr"]
+[gd_scene load_steps=7 format=3 uid="uid://b2r1uinveiglr"]
 
-[ext_resource type="Texture2D" uid="uid://b6i2y4umi2f33" path="res://icon.svg" id="1_kxtci"]
 [ext_resource type="Script" uid="uid://xxj40pa0olli" path="res://player Bullet/player_bullet.gd" id="1_t7of7"]
+[ext_resource type="Texture2D" uid="uid://bojvrix06o3ge" path="res://player Bullet/Character bullet (1).png" id="2_t7of7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck6n1"]
+atlas = ExtResource("2_t7of7")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jwfg"]
+atlas = ExtResource("2_t7of7")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgr5c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck6n1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jwfg")
+}],
+"loop": true,
+"name": &"bullet",
+"speed": 12.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kxtci"]
 radius = 17.088
@@ -11,16 +33,27 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_t7of7")
 
-[node name="bulletSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.217683, 0.229571)
-texture = ExtResource("1_kxtci")
+[node name="BulletSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-12, 2)
+sprite_frames = SubResource("SpriteFrames_sgr5c")
+animation = &"bullet"
+autoplay = "bullet"
+frame = 1
+frame_progress = 0.93883
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BulletCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kxtci")
 debug_color = Color(0.996673, 0, 0.182052, 0.42)
+
+[node name="BulletVisibleIn" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+autostart = true
 
 [node name="BulletAutoDelete" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
+[connection signal="timeout" from="BulletVisibleIn" to="." method="_on_bullet_visible_in_timeout"]
 [connection signal="timeout" from="BulletAutoDelete" to="." method="_on_bullet_auto_delete_timeout"]
