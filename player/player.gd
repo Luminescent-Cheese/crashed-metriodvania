@@ -5,7 +5,7 @@ extends CharacterBody2D
 var MAXSPEED = 800
 var gravity = 150 
 var maxjumpHeight = 600
-var recoilStrength = 30
+var recoilStrength = 50
 var jumpTime = 30
 #controls how fast play loses speed when jumping
 var jumpDivision = 6.0

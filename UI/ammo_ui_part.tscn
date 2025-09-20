@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://tea41pkk64y8"]
+
+[ext_resource type="Script" uid="uid://bght1xkq8jivp" path="res://UI/ammo_ui_state.gd" id="1_k5tjl"]
+
+[node name="AmmoUIPart" type="ColorRect"]
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 66.0
+offset_bottom = 29.0
+script = ExtResource("1_k5tjl")

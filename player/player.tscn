@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c3rvuof8qkvnb" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Texture2D" uid="uid://ccfmiuujohtta" path="res://player/Character Idle (2).png" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://cbwxvvtv0th5j" path="res://player/Character walking (1).png" id="2_g1dw6"]
-[ext_resource type="Script" uid="uid://b3cern3xe5l4f" path="res://player/shoot.gd" id="2_g6k8r"]
+[ext_resource type="Script" uid="uid://b3cern3xe5l4f" path="res://player/arm/shoot.gd" id="2_g6k8r"]
 [ext_resource type="Texture2D" uid="uid://c737gon4ejkx6" path="res://player/arm/Pistol Arm.png" id="2_qjkh3"]
 [ext_resource type="Texture2D" uid="uid://bnugscbaky8om" path="res://player/arm/Pistol spin.png" id="3_boad6"]
 [ext_resource type="Texture2D" uid="uid://cdsbyuwvah12x" path="res://player/Character fall (1).png" id="4_yw30f"]
@@ -1079,8 +1079,8 @@ parameters/conditions/is_jumping = false
 parameters/conditions/is_moving = false
 parameters/conditions/isn't_falling = false
 parameters/conditions/not_moving = false
-parameters/Falling/blend_position = 0
-parameters/Idle/blend_position = 0
+parameters/Falling/blend_position = 0.0
+parameters/Idle/blend_position = 0.0
 parameters/Jumping/blend_position = -0.99596
 parameters/Walk/blend_position = -0.986869
 

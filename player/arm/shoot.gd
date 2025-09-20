@@ -6,13 +6,13 @@ signal fire_recoil
 @export var GunAnimationPlayer: AnimationPlayer
 
 @export var canShoot = true
-var maxAmmo = 1
+var maxAmmo = 5
 var recoil = 1000
 
 @onready var bulletSpawn = $ArmAnimations/bulletFirePoint
 var intendedDirection: String = "not"
 var currentDirection = 0
-var currentAmmo = 1
+var currentAmmo = 5
 var currentFacing = 1
 func _physics_process(delta: float) -> void:
 	
