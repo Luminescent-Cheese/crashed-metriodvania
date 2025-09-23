@@ -3,7 +3,7 @@ extends Node2D
 @onready var playerGun = $"Player/Arm"
 
 #All the variables that need to be saved between rooms
-var maxAmmo = 1
+var maxAmmo = 5
 var maxHealth
 
 var currentAmmo = 1

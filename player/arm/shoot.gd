@@ -10,6 +10,8 @@ var maxAmmo = 0
 var recoil = 1000
 
 @onready var bulletSpawn = $ArmAnimations/bulletFirePoint
+@onready var timeSinceLastBullet = $TimeSinceLastBullet
+
 var intendedDirection: String = "not"
 var currentDirection = 0
 var currentAmmo = 0
@@ -19,10 +21,16 @@ func _physics_process(delta: float) -> void:
 	#Gets player current position
 	if Input.get_axis("left","right") != 0:
 		currentFacing = int(Input.get_axis("left","right"))
-		
+	
+	if get_parent().is_on_floor() and currentAmmo != maxAmmo:
+		if timeSinceLastBullet.is_stopped():
+			timeSinceLastBullet.start()
+	else:
+		timeSinceLastBullet.stop()
 	#Fires gun
 	if currentAmmo >  0:
 		if Input.is_action_pressed("shoot"):
+			timeSinceLastBullet.stop()
 			GunAnimationPlayer.play("shoot")
 	else:
 		if get_parent().is_on_floor():
@@ -56,3 +64,8 @@ func fireBullet():
 
 func reload():
 	currentAmmo = maxAmmo
+
+
+func _on_time_since_last_bullet_timeout() -> void:
+	#if the player doesn't do anything for a while this will automatically reset their ammo
+	GunAnimationPlayer.play("spin")

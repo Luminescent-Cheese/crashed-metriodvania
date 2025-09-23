@@ -1055,6 +1055,10 @@ libraries = {
 }
 speed_scale = 2.0
 
+[node name="TimeSinceLastBullet" type="Timer" parent="Arm"]
+wait_time = 0.5
+one_shot = true
+
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_tqiix")
@@ -1090,3 +1094,4 @@ position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
 [connection signal="fire_recoil" from="Arm" to="." method="_on_arm_fire_recoil"]
+[connection signal="timeout" from="Arm/TimeSinceLastBullet" to="Arm" method="_on_time_since_last_bullet_timeout"]

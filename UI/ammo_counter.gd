@@ -12,7 +12,6 @@ func _load_Ammo_UI():
 		newAmmoUI.name = "AmmoUIPart" + str(i)
 		newAmmoUI.position.y = (i * 15) + distanceFromTop
 		add_child(newAmmoUI)
-		print(get_children())
 	
 func _process(delta: float) -> void:
 	for i in range(maxAmmo):
