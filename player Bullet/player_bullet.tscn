@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2r1uinveiglr"]
+[gd_scene load_steps=17 format=3 uid="uid://b2r1uinveiglr"]
 
 [ext_resource type="Script" uid="uid://xxj40pa0olli" path="res://player Bullet/player_bullet.gd" id="1_t7of7"]
 [ext_resource type="Texture2D" uid="uid://bojvrix06o3ge" path="res://player Bullet/Character bullet (1).png" id="2_t7of7"]
+[ext_resource type="Texture2D" uid="uid://eawhsbmuly01" path="res://player Bullet/NewPlayerBullet (1).png" id="3_ck6n1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ck6n1"]
 atlas = ExtResource("2_t7of7")
@@ -10,6 +11,10 @@ region = Rect2(0, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1jwfg"]
 atlas = ExtResource("2_t7of7")
 region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgr5c"]
+atlas = ExtResource("3_ck6n1")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sgr5c"]
 animations = [{
@@ -23,10 +28,126 @@ animations = [{
 "loop": true,
 "name": &"bullet",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgr5c")
+}],
+"loop": true,
+"name": &"newBullet",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kxtci"]
-radius = 17.088
+radius = 25.019993
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t7of7"]
+radius = 14.0
+height = 58.0
+
+[sub_resource type="Animation" id="Animation_ck6n1"]
+resource_name = "bulletHitWall"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.46666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../BulletSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_1jwfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BulletSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../BulletSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"newBullet"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sgr5c"]
+_data = {
+&"RESET": SubResource("Animation_1jwfg"),
+&"bulletHitWall": SubResource("Animation_ck6n1")
+}
+
+[sub_resource type="Gradient" id="Gradient_eojii"]
+offsets = PackedFloat32Array(0, 0.093333334)
+colors = PackedColorArray(1, 1, 1, 1, 0.585062, 0.585062, 0.5850621, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kchnh"]
+gradient = SubResource("Gradient_eojii")
+fill = 1
+fill_from = Vector2(0.5046729, 0.5046729)
+
+[sub_resource type="Curve" id="Curve_f0hyj"]
+_data = [Vector2(0, 0.52808994), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.3370787), 0.0, 0.0, 0, 0, Vector2(1, 0.8764045), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ckgnk"]
+offsets = PackedFloat32Array(0.1369863, 0.4041096, 0.9726027)
+colors = PackedColorArray(1, 0.43333334, 0, 1, 0.3665946, 0.3665946, 0.36659458, 1, 0.37, 0.37, 0.37, 0)
 
 [node name="playerBullet" type="CharacterBody2D"]
 collision_layer = 4
@@ -35,16 +156,23 @@ script = ExtResource("1_t7of7")
 
 [node name="BulletSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-12, 2)
+position = Vector2(0, 4)
 sprite_frames = SubResource("SpriteFrames_sgr5c")
-animation = &"bullet"
-autoplay = "bullet"
-frame = 1
-frame_progress = 0.93883
+animation = &"newBullet"
+autoplay = "newBullet"
 
 [node name="BulletCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kxtci")
 debug_color = Color(0.996673, 0, 0.182052, 0.42)
+
+[node name="BulletHit" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHit"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_t7of7")
+debug_color = Color(0.33637094, 0.6224111, 1.732707e-06, 0.41960785)
 
 [node name="BulletVisibleIn" type="Timer" parent="."]
 wait_time = 0.01
@@ -55,5 +183,36 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
+[node name="bulletHitAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../bulletHitParticles")
+libraries = {
+&"": SubResource("AnimationLibrary_sgr5c")
+}
+
+[node name="bulletHitParticles" type="CPUParticles2D" parent="."]
+position = Vector2(20, 0)
+emitting = false
+amount = 30
+texture = SubResource("GradientTexture2D_kchnh")
+lifetime = 0.5
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+randomness = 0.32
+direction = Vector2(-1, 0)
+spread = 20.0
+gravity = Vector2(0, 50)
+initial_velocity_min = 22.6
+initial_velocity_max = 304.42
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_f0hyj")
+color = Color(0.5370113, 0.5370113, 0.5370113, 1)
+color_ramp = SubResource("Gradient_ckgnk")
+hue_variation_min = -0.64
+hue_variation_max = 0.29
+
+[connection signal="body_entered" from="BulletHit" to="." method="_on_bullet_hit_body_entered"]
 [connection signal="timeout" from="BulletVisibleIn" to="." method="_on_bullet_visible_in_timeout"]
 [connection signal="timeout" from="BulletAutoDelete" to="." method="_on_bullet_auto_delete_timeout"]
