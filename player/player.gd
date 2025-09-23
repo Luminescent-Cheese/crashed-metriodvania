@@ -2,7 +2,7 @@ extends CharacterBody2D
 @onready var Game = $".."
 @onready var animation_tree = $PlayerAnimationTree
 #Factual Variables
-var MAXSPEED = 800
+var MAXSPEED = 500
 var gravity = 150 
 var maxjumpHeight = 600
 var recoilStrength = 50

@@ -5,6 +5,6 @@
 [node name="AmmoUIPart" type="ColorRect"]
 offset_left = 10.0
 offset_top = 6.0
-offset_right = 66.0
-offset_bottom = 29.0
+offset_right = 39.0
+offset_bottom = 16.0
 script = ExtResource("1_k5tjl")

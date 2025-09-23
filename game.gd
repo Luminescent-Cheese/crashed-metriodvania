@@ -1,6 +1,13 @@
 extends Node2D
-@onready var AmmoCounter = $"CanvasLayer/Ammo Counter"
+@onready var AmmoCounter = $"UI/Ammo Counter"
 @onready var playerGun = $"Player/Arm"
+
+#All the variables that need to be saved between rooms
+var maxAmmo = 1
+var maxHealth
+
+var currentAmmo = 1
+var currentHealth
 #slows the game by timescale and lasts for duration
 func frame_freeze(timescale: float, duration: float) -> void:
 	Engine.time_scale = timescale
@@ -9,8 +16,10 @@ func frame_freeze(timescale: float, duration: float) -> void:
 
 
 func _ready() -> void:
-	AmmoCounter.maxAmmo = playerGun.maxAmmo
-	AmmoCounter.currentAmmo = playerGun.currentAmmo
+	AmmoCounter.maxAmmo = maxAmmo
+	AmmoCounter.currentAmmo = currentAmmo
+	playerGun.maxAmmo = maxAmmo
+	playerGun.currentAmmo = currentAmmo
 	AmmoCounter._load_Ammo_UI()
 	
 func _process(delta: float) -> void:
@@ -18,6 +27,7 @@ func _process(delta: float) -> void:
 		frame_freeze(0, 0.02)
 	#Temp solution to having UI display ammo proper
 	AmmoCounter.maxAmmo = playerGun.maxAmmo
+	currentAmmo = playerGun.currentAmmo
 	AmmoCounter.currentAmmo = playerGun.currentAmmo
 	
 	

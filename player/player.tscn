@@ -1087,6 +1087,6 @@ parameters/Walk/blend_position = -0.986869
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
-position_smoothing_speed = 4.0
+position_smoothing_speed = 3.0
 
 [connection signal="fire_recoil" from="Arm" to="." method="_on_arm_fire_recoil"]
