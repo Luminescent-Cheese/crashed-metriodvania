@@ -1,6 +1,9 @@
 extends CharacterBody2D
 @onready var Game = $".."
 @onready var animation_tree = $PlayerAnimationTree
+
+#Signals
+signal ResetBulletUIBooster
 #Factual Variables
 var MAXSPEED = 500
 var gravity = 150 
@@ -157,3 +160,7 @@ func _update_animations(x,y):
 		animation_tree["parameters/Walk/blend_position"] = heldDirection
 		animation_tree["parameters/Falling/blend_position"] = heldDirection
 		animation_tree["parameters/Jumping/blend_position"] = heldDirection
+
+
+func _on_arm_reset_bullet_ui() -> void:
+	ResetBulletUIBooster.emit()

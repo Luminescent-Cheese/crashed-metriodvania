@@ -3,7 +3,7 @@ extends Node2D
 @onready var playerGun = $"Player/Arm"
 
 #All the variables that need to be saved between rooms
-var maxAmmo = 5
+var maxAmmo = 6
 var maxHealth
 
 var currentAmmo = 1
@@ -13,7 +13,6 @@ func frame_freeze(timescale: float, duration: float) -> void:
 	Engine.time_scale = timescale
 	await get_tree().create_timer(duration, true, false, true).timeout
 	Engine.time_scale = 1.0
-
 
 func _ready() -> void:
 	AmmoCounter.maxAmmo = maxAmmo
@@ -30,4 +29,6 @@ func _process(delta: float) -> void:
 	currentAmmo = playerGun.currentAmmo
 	AmmoCounter.currentAmmo = playerGun.currentAmmo
 	
-	
+
+func _on_player_reset_bullet_ui_booster() -> void:
+	AmmoCounter._reset_Ammo_UI()

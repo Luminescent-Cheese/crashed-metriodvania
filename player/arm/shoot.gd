@@ -6,7 +6,7 @@ signal fire_recoil
 @export var GunAnimationPlayer: AnimationPlayer
 
 @export var canShoot = true
-var maxAmmo = 0
+var maxAmmo = 6
 var recoil = 1000
 
 @onready var bulletSpawn = $ArmAnimations/bulletFirePoint
@@ -16,6 +16,10 @@ var intendedDirection: String = "not"
 var currentDirection = 0
 var currentAmmo = 0
 var currentFacing = 1
+
+#signal that tells UI to reset bullets
+signal resetBulletUI
+
 func _physics_process(delta: float) -> void:
 	
 	#Gets player current position
@@ -35,6 +39,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		if get_parent().is_on_floor():
 			GunAnimationPlayer.play("spin")
+			resetBulletUI.emit()
 		
 	#rotates gun to right position (intendedDirection is used to tell the bullets which direction to fire)
 	if Input.is_action_pressed("up"):
@@ -69,3 +74,4 @@ func reload():
 func _on_time_since_last_bullet_timeout() -> void:
 	#if the player doesn't do anything for a while this will automatically reset their ammo
 	GunAnimationPlayer.play("spin")
+	resetBulletUI.emit()

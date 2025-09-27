@@ -1,6 +1,170 @@
-[gd_scene load_steps=2 format=3 uid="uid://p42oqkqpd4sa"]
+[gd_scene load_steps=17 format=3 uid="uid://p42oqkqpd4sa"]
 
 [ext_resource type="Script" uid="uid://bsnibn2pqjcnp" path="res://UI/ammo_counter.gd" id="1_uu1m0"]
+[ext_resource type="Texture2D" uid="uid://p4adq1746hcl" path="res://UI/gun barrel ui.png" id="2_f1y6u"]
+[ext_resource type="Texture2D" uid="uid://dnfy8elww0x06" path="res://UI/gun barrel ui spin (1).png" id="3_b4c7v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4c7v"]
+atlas = ExtResource("2_f1y6u")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x88rt"]
+atlas = ExtResource("3_b4c7v")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5fvx"]
+atlas = ExtResource("3_b4c7v")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cq8ah"]
+atlas = ExtResource("3_b4c7v")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljl5m"]
+atlas = ExtResource("3_b4c7v")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s18ik"]
+atlas = ExtResource("3_b4c7v")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ciucb"]
+atlas = ExtResource("3_b4c7v")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0362v"]
+atlas = ExtResource("3_b4c7v")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gckl8"]
+atlas = ExtResource("3_b4c7v")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x88rt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4c7v")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x88rt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5fvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cq8ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljl5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s18ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ciucb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0362v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gckl8")
+}],
+"loop": false,
+"name": &"spin",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_b4c7v"]
+resource_name = "spin"
+length = 0.75
+step = 0.0833
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"spin"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0833, 0.1666, 0.24990001, 0.3332, 0.4165, 0.49980003, 0.5831, 0.6664),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_x88rt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"spin"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x88rt"]
+_data = {
+&"RESET": SubResource("Animation_x88rt"),
+&"spin": SubResource("Animation_b4c7v")
+}
 
 [node name="Ammo Counter" type="Control"]
 layout_mode = 3
@@ -10,3 +174,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uu1m0")
+
+[node name="BarrelUI" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(64, 64)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_x88rt")
+animation = &"spin"
+
+[node name="BulletSpawn0" type="Node2D" parent="BarrelUI"]
+position = Vector2(0, -68)
+
+[node name="BulletSpawn1" type="Node2D" parent="BarrelUI"]
+position = Vector2(60, -36)
+
+[node name="BulletSpawn2" type="Node2D" parent="BarrelUI"]
+position = Vector2(60, 36)
+
+[node name="BulletSpawn3" type="Node2D" parent="BarrelUI"]
+position = Vector2(0, 68)
+
+[node name="BulletSpawn4" type="Node2D" parent="BarrelUI"]
+position = Vector2(-60, 36)
+scale = Vector2(2, 2)
+
+[node name="BulletSpawn5" type="Node2D" parent="BarrelUI"]
+position = Vector2(-60, -36)
+
+[node name="BarrelUIAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BarrelUI")
+libraries = {
+&"": SubResource("AnimationLibrary_x88rt")
+}

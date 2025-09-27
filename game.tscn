@@ -29,3 +29,5 @@ tile_set = SubResource("TileSet_fc0e3")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Ammo Counter" parent="UI" instance=ExtResource("4_fc0e3")]
+
+[connection signal="ResetBulletUIBooster" from="Player" to="." method="_on_player_reset_bullet_ui_booster"]
