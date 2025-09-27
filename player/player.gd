@@ -8,7 +8,7 @@ signal ResetBulletUIBooster
 var MAXSPEED = 500
 var gravity = 150 
 var maxjumpHeight = 600
-var recoilStrength = 50
+var recoilStrength = 20
 var jumpTime = 30
 #controls how fast play loses speed when jumping
 var jumpDivision = 6.0

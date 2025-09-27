@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://tea41pkk64y8"]
 
-[ext_resource type="Texture2D" uid="uid://c6chmbk6r7k42" path="res://UI/bullet ui.png" id="1_4g13n"]
+[ext_resource type="Texture2D" uid="uid://c6chmbk6r7k42" path="res://UI/animations/bullet ui.png" id="1_4g13n"]
 [ext_resource type="Script" uid="uid://bght1xkq8jivp" path="res://UI/ammo_ui_state.gd" id="1_k5tjl"]
 
 [node name="AmmoUIPart" type="Sprite2D"]
+z_index = 2
 texture_filter = 1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_4g13n")

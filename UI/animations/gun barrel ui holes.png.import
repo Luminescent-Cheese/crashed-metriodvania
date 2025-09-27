@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p4adq1746hcl"
-path="res://.godot/imported/gun barrel ui.png-ec6c23fecc6a559c20022c03941e1370.ctex"
+uid="uid://ddvksyroqq8b0"
+path="res://.godot/imported/gun barrel ui holes.png-c03769198e303d3ede04e19395674b2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/gun barrel ui.png"
-dest_files=["res://.godot/imported/gun barrel ui.png-ec6c23fecc6a559c20022c03941e1370.ctex"]
+source_file="res://UI/animations/gun barrel ui holes.png"
+dest_files=["res://.godot/imported/gun barrel ui holes.png-c03769198e303d3ede04e19395674b2a.ctex"]
 
 [params]
 

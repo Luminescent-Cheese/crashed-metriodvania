@@ -7,7 +7,7 @@ signal fire_recoil
 
 @export var canShoot = true
 var maxAmmo = 6
-var recoil = 1000
+var recoil = 500
 
 @onready var bulletSpawn = $ArmAnimations/bulletFirePoint
 @onready var timeSinceLastBullet = $TimeSinceLastBullet

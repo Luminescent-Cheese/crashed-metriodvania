@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6chmbk6r7k42"
-path="res://.godot/imported/bullet ui.png-7d7a4bcad8d57032babb5561b4a3550b.ctex"
+uid="uid://dnfy8elww0x06"
+path="res://.godot/imported/gun barrel ui spin (1).png-9991a037984b95780c217d863b68a73e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/bullet ui.png"
-dest_files=["res://.godot/imported/bullet ui.png-7d7a4bcad8d57032babb5561b4a3550b.ctex"]
+source_file="res://UI/animations/gun barrel ui spin (1).png"
+dest_files=["res://.godot/imported/gun barrel ui spin (1).png-9991a037984b95780c217d863b68a73e.ctex"]
 
 [params]
 
