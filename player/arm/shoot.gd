@@ -38,6 +38,7 @@ func _physics_process(delta: float) -> void:
 			GunAnimationPlayer.play("shoot")
 	else:
 		if get_parent().is_on_floor():
+			currentAmmo = 0
 			GunAnimationPlayer.play("spin")
 			resetBulletUI.emit()
 		
@@ -73,5 +74,6 @@ func reload():
 
 func _on_time_since_last_bullet_timeout() -> void:
 	#if the player doesn't do anything for a while this will automatically reset their ammo
+	currentAmmo = 0
 	GunAnimationPlayer.play("spin")
 	resetBulletUI.emit()

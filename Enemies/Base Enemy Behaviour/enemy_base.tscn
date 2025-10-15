@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm57ela8ta5dv"]
+
+[ext_resource type="Script" uid="uid://c1xtxmlsj0rvw" path="res://Enemies/Base Enemy Behaviour/enemy_base.gd" id="1_6tdjh"]
+[ext_resource type="Script" uid="uid://dcvbwlnf8co2b" path="res://Enemies/Base Enemy Behaviour/EnemyDirectionInformation.gd" id="1_shhxk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tdjh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6haje"]
+radius = 347.3111
+
+[node name="EnemyBase" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_6tdjh")
+animation = NodePath("SpriteFrames")
+
+[node name="Collisions" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6tdjh")
+
+[node name="PlayerDetectionRange" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="PlayerDetectionRangeCollision" type="CollisionShape2D" parent="PlayerDetectionRange"]
+shape = SubResource("CircleShape2D_6haje")
+debug_color = Color(0.3280323, 0.6093776, 0.38839534, 0.41960785)
+
+[node name="SpriteFrames" type="AnimatedSprite2D" parent="."]
+
+[node name="Directions" type="Node2D" parent="."]
+script = ExtResource("1_shhxk")
+
+[node name="Left" type="RayCast2D" parent="Directions"]
+rotation = 1.5707964
+target_position = Vector2(5.2890778e-06, 121)
+collision_mask = 2
+
+[node name="Down" type="RayCast2D" parent="Directions"]
+target_position = Vector2(0, 121)
+collision_mask = 2
+
+[node name="Up" type="RayCast2D" parent="Directions"]
+rotation = 3.1415927
+target_position = Vector2(0, 121)
+collision_mask = 2
+
+[node name="Right" type="RayCast2D" parent="Directions"]
+rotation = 4.712389
+target_position = Vector2(0, 121)
+collision_mask = 2
+
+[node name="Timers" type="Node2D" parent="."]

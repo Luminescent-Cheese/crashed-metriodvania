@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://p5aajw7ehfxg"]
+[gd_scene load_steps=8 format=4 uid="uid://p5aajw7ehfxg"]
 
 [ext_resource type="PackedScene" uid="uid://dtjjmbh6huaru" path="res://player/player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://c0p7ilmklsx40" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="Texture2D" uid="uid://yj7fyrd18lwi" path="res://New Piskel (1).png" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://p42oqkqpd4sa" path="res://UI/ammo_counter.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://cm57ela8ta5dv" path="res://Enemies/Base Enemy Behaviour/enemy_base.tscn" id="5_7jktm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feb5d"]
 texture = ExtResource("2_e2o6t")
@@ -29,5 +30,8 @@ tile_set = SubResource("TileSet_fc0e3")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Ammo Counter" parent="UI" instance=ExtResource("4_fc0e3")]
+
+[node name="EnemyBase" parent="." instance=ExtResource("5_7jktm")]
+position = Vector2(-197, 62)
 
 [connection signal="ResetBulletUIBooster" from="Player" to="." method="_on_player_reset_bullet_ui_booster"]
