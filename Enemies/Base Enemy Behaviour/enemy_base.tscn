@@ -1,12 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm57ela8ta5dv"]
+[gd_scene load_steps=9 format=3 uid="uid://cm57ela8ta5dv"]
 
 [ext_resource type="Script" uid="uid://c1xtxmlsj0rvw" path="res://Enemies/Base Enemy Behaviour/enemy_base.gd" id="1_6tdjh"]
 [ext_resource type="Script" uid="uid://dcvbwlnf8co2b" path="res://Enemies/Base Enemy Behaviour/EnemyDirectionInformation.gd" id="1_shhxk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tdjh"]
+radius = 64.00781
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6haje"]
 radius = 347.3111
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8b1c5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fbv7r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e5se4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_se4tv"]
 
 [node name="EnemyBase" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
 collision_layer = 8
@@ -21,6 +30,7 @@ shape = SubResource("CircleShape2D_6tdjh")
 collision_layer = 0
 
 [node name="PlayerDetectionRangeCollision" type="CollisionShape2D" parent="PlayerDetectionRange"]
+position = Vector2(1, -6)
 shape = SubResource("CircleShape2D_6haje")
 debug_color = Color(0.3280323, 0.6093776, 0.38839534, 0.41960785)
 
@@ -48,4 +58,47 @@ rotation = 4.712389
 target_position = Vector2(0, 121)
 collision_mask = 2
 
+[node name="Q1" type="Area2D" parent="Directions"]
+position = Vector2(85, -85)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Q1"]
+shape = SubResource("CircleShape2D_8b1c5")
+
+[node name="Q2" type="Area2D" parent="Directions"]
+position = Vector2(-85, -85)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Q2"]
+shape = SubResource("CircleShape2D_fbv7r")
+
+[node name="Q3" type="Area2D" parent="Directions"]
+position = Vector2(-85, 85)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Q3"]
+shape = SubResource("CircleShape2D_e5se4")
+
+[node name="Q4" type="Area2D" parent="Directions"]
+position = Vector2(85, 85)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Directions/Q4"]
+shape = SubResource("CircleShape2D_se4tv")
+
 [node name="Timers" type="Node2D" parent="."]
+
+[node name="EnemyAnimations" type="AnimationPlayer" parent="."]
+
+[connection signal="body_entered" from="Directions/Q1" to="Directions" method="_on_q_1_body_entered"]
+[connection signal="body_exited" from="Directions/Q1" to="Directions" method="_on_q_1_body_exited"]
+[connection signal="body_entered" from="Directions/Q2" to="Directions" method="_on_q_2_body_entered"]
+[connection signal="body_exited" from="Directions/Q2" to="Directions" method="_on_q_2_body_exited"]
+[connection signal="body_entered" from="Directions/Q3" to="Directions" method="_on_q_3_body_entered"]
+[connection signal="body_exited" from="Directions/Q3" to="Directions" method="_on_q_3_body_exited"]
+[connection signal="body_entered" from="Directions/Q4" to="Directions" method="_on_q_4_body_entered"]
+[connection signal="body_exited" from="Directions/Q4" to="Directions" method="_on_q_4_body_exited"]

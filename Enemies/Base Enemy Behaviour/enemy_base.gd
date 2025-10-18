@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var directions = $Directions
 #fact variables
 @export var health: int = 5
 @export var stunTime = .2
@@ -13,3 +14,6 @@ func take_damage(amount):
 	await get_tree().create_timer(stunTime, true, false, true).timeout
 	stunned = false
 	animation.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+func dead():
+	queue_free()

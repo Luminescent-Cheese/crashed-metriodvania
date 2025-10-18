@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c0p7ilmklsx40" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="Texture2D" uid="uid://yj7fyrd18lwi" path="res://New Piskel (1).png" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://p42oqkqpd4sa" path="res://UI/ammo_counter.tscn" id="4_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://cm57ela8ta5dv" path="res://Enemies/Base Enemy Behaviour/enemy_base.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://ctootp1ydltq8" path="res://Enemies/EnemyTypes/basic_enemy.tscn" id="5_7jktm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feb5d"]
 texture = ExtResource("2_e2o6t")
@@ -15,7 +15,7 @@ texture_region_size = Vector2i(128, 128)
 [sub_resource type="TileSet" id="TileSet_fc0e3"]
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_mask = 11
 sources/1 = SubResource("TileSetAtlasSource_feb5d")
 
 [node name="Game" type="Node2D"]
@@ -31,7 +31,7 @@ tile_set = SubResource("TileSet_fc0e3")
 
 [node name="Ammo Counter" parent="UI" instance=ExtResource("4_fc0e3")]
 
-[node name="EnemyBase" parent="." instance=ExtResource("5_7jktm")]
-position = Vector2(-197, 62)
+[node name="BasicEnemy" parent="." instance=ExtResource("5_7jktm")]
+position = Vector2(2361, -192)
 
 [connection signal="ResetBulletUIBooster" from="Player" to="." method="_on_player_reset_bullet_ui_booster"]

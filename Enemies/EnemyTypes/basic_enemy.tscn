@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctootp1ydltq8"]
+
+[ext_resource type="PackedScene" uid="uid://cm57ela8ta5dv" path="res://Enemies/Base Enemy Behaviour/enemy_base.tscn" id="1_5bdcw"]
+[ext_resource type="Script" uid="uid://dlts5i13rio7q" path="res://basic_enemy.gd" id="2_0wgv1"]
+[ext_resource type="Texture2D" uid="uid://b6i2y4umi2f33" path="res://icon.svg" id="3_0wgv1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1mma"]
+atlas = ExtResource("3_0wgv1")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_10shq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1mma")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BasicEnemy" instance=ExtResource("1_5bdcw")]
+script = ExtResource("2_0wgv1")
+
+[node name="SpriteFrames" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_10shq")

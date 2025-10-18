@@ -45,6 +45,45 @@ radius = 25.019993
 radius = 14.0
 height = 58.0
 
+[sub_resource type="Animation" id="Animation_1jwfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BulletSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../BulletSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"newBullet"]
+}
+
 [sub_resource type="Animation" id="Animation_ck6n1"]
 resource_name = "bulletHitWall"
 length = 0.5
@@ -87,45 +126,6 @@ tracks/2/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_1jwfg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../BulletSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../BulletSprite:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"newBullet"]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sgr5c"]
 _data = {
 &"RESET": SubResource("Animation_1jwfg"),
@@ -151,7 +151,7 @@ colors = PackedColorArray(1, 0.43333334, 0, 1, 0.3665946, 0.3665946, 0.36659458,
 
 [node name="playerBullet" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 10
 script = ExtResource("1_t7of7")
 
 [node name="BulletSprite" type="AnimatedSprite2D" parent="."]
@@ -167,7 +167,7 @@ debug_color = Color(0.996673, 0, 0.182052, 0.42)
 
 [node name="BulletHit" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHit"]
 rotation = 1.5707964
