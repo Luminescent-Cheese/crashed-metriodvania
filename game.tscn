@@ -33,5 +33,9 @@ tile_set = SubResource("TileSet_fc0e3")
 
 [node name="BasicEnemy" parent="." instance=ExtResource("5_7jktm")]
 position = Vector2(2361, -192)
+collision_mask = 6
+
+[node name="BasicEnemy2" parent="." instance=ExtResource("5_7jktm")]
+position = Vector2(-866, 64)
 
 [connection signal="ResetBulletUIBooster" from="Player" to="." method="_on_player_reset_bullet_ui_booster"]

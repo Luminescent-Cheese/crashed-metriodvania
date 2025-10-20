@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cm57ela8ta5dv"]
+[gd_scene load_steps=10 format=3 uid="uid://cm57ela8ta5dv"]
 
 [ext_resource type="Script" uid="uid://c1xtxmlsj0rvw" path="res://Enemies/Base Enemy Behaviour/enemy_base.gd" id="1_6tdjh"]
 [ext_resource type="Script" uid="uid://dcvbwlnf8co2b" path="res://Enemies/Base Enemy Behaviour/EnemyDirectionInformation.gd" id="1_shhxk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tdjh"]
 radius = 64.00781
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tdjh"]
+size = Vector2(130, 132)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6haje"]
 radius = 347.3111
@@ -19,12 +22,21 @@ radius = 347.3111
 
 [node name="EnemyBase" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 2
 script = ExtResource("1_6tdjh")
 animation = NodePath("SpriteFrames")
 
-[node name="Collisions" type="CollisionShape2D" parent="."]
+[node name="GroundCollisions" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6tdjh")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_6tdjh")
+debug_color = Color(0.9472478, 0.20240042, 0.29453656, 0.41960785)
 
 [node name="PlayerDetectionRange" type="Area2D" parent="."]
 collision_layer = 0
@@ -94,6 +106,7 @@ shape = SubResource("CircleShape2D_se4tv")
 
 [node name="EnemyAnimations" type="AnimationPlayer" parent="."]
 
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="Directions/Q1" to="Directions" method="_on_q_1_body_entered"]
 [connection signal="body_exited" from="Directions/Q1" to="Directions" method="_on_q_1_body_exited"]
 [connection signal="body_entered" from="Directions/Q2" to="Directions" method="_on_q_2_body_entered"]
