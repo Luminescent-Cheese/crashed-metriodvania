@@ -106,6 +106,9 @@ shape = SubResource("CircleShape2D_se4tv")
 
 [node name="EnemyAnimations" type="AnimationPlayer" parent="."]
 
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../HitBox")
+
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="Directions/Q1" to="Directions" method="_on_q_1_body_entered"]
 [connection signal="body_exited" from="Directions/Q1" to="Directions" method="_on_q_1_body_exited"]

@@ -24,21 +24,22 @@ func take_damage(amount):
 func idle_movement(speed):
 	#basic movement for enemy
 	#checks RayCasts and Quadrants for obstacles
-	if Enemydirection.x == 1:
-		if directions.QuadrantCollisions["Q4"] == false:
-			Enemydirection.x = -1
-		else:
-			if directions.DirectionCollisions["Right"] != null:
+	if not stunned:
+		if Enemydirection.x == 1:
+			if directions.QuadrantCollisions["Q4"] == false:
 				Enemydirection.x = -1
+			else:
+				if directions.DirectionCollisions["Right"] != null:
+					Enemydirection.x = -1
 
-	else:
-		if directions.QuadrantCollisions["Q3"] == false:
-			Enemydirection.x = 1
 		else:
-			if directions.DirectionCollisions["Left"] != null:
+			if directions.QuadrantCollisions["Q3"] == false:
 				Enemydirection.x = 1
-	velocity = 100 * Enemydirection
-	move_and_slide()
+			else:
+				if directions.DirectionCollisions["Left"] != null:
+					Enemydirection.x = 1
+		velocity = 100 * Enemydirection
+		move_and_slide()
 
 func dead():
 	queue_free()

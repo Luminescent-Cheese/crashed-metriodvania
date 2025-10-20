@@ -1021,14 +1021,14 @@ advance_condition = &"is_jumping"
 states/Falling/node = SubResource("AnimationNodeBlendSpace1D_8t03j")
 states/Falling/position = Vector2(1053, 215)
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_g6k8r")
-states/Idle/position = Vector2(446, 103)
+states/Idle/position = Vector2(433, 118)
 states/Jumping/node = SubResource("AnimationNodeBlendSpace1D_rgyib")
 states/Jumping/position = Vector2(607, 226)
 states/Start/position = Vector2(210, 107)
 states/Walk/node = SubResource("AnimationNodeBlendSpace1D_hg6s5")
 states/Walk/position = Vector2(446, 363)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_8t03j"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_2ieo8"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ebec5"), "Falling", "Idle", SubResource("AnimationNodeStateMachineTransition_qjkh3"), "Idle", "Falling", SubResource("AnimationNodeStateMachineTransition_yw30f"), "Walk", "Falling", SubResource("AnimationNodeStateMachineTransition_yllr7"), "Falling", "Walk", SubResource("AnimationNodeStateMachineTransition_kb6p2"), "Jumping", "Falling", SubResource("AnimationNodeStateMachineTransition_rgyib"), "Walk", "Jumping", SubResource("AnimationNodeStateMachineTransition_hg6s5"), "Idle", "Jumping", SubResource("AnimationNodeStateMachineTransition_wodsf"), "Falling", "Jumping", SubResource("AnimationNodeStateMachineTransition_32hag")]
-graph_offset = Vector2(20, 89)
+graph_offset = Vector2(-67, 90)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 3
